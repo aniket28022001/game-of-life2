@@ -6,10 +6,10 @@ on:
       environment:
         description: 'Target Environment'
         required: true
-        default: 'pre-prod'
+        default: 'test'
 
 concurrency:
-  group: pre-prod
+  group: test
 
 jobs:
   approval_required:
