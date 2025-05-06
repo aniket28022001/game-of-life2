@@ -1,0 +1,25 @@
+name: EKS Pre-Prod Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target Environment'
+        required: true
+        default: 'test'
+
+concurrency:
+  group: test
+
+jobs:
+  approval_required:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ secrets.PAT }}
+          minimum-approvals: 1
+          issue-title: "Deploying to pre-prod"
+          approvers: ${{ secrets.APPROVERS_LIST }}
+
+ 
